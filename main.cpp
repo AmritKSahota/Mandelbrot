@@ -10,7 +10,12 @@ int main ()
   RenderWindow window(VideoMode(width, height), "Mandelbrot Visualz");
   ComplexPlane cp(width, height);
 
-  //font stuff unforch goes here ; come back to do that once you upload the ttf
+  Font font;
+  font.loadFromFile("arial.ttf"); // please work font file pls -- AS
+  Text text;
+  text.setFont(font);
+  text.setCharacterSize(16);
+  text.setFillColor(Color::White);
 
   while (window.isOpen())
     {
