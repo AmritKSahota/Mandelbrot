@@ -81,16 +81,17 @@ void ComplexPlane::loadText(Text& text)
 size_t ComplexPlane::countIterations(Vector2f coord)
 {
   //mandelbrot algo - refer to page if needed -- AS
-Vector2f z = coord;
-  for (size_t i = 0; i < MAX_INTER; i++)
+Vector2f z(0, 0); // z starts at 0
+    for (size_t i = 0; i < MAX_INTER; i++)
     {
-    float x = z.x * z.x - z.y * z.y + coord.x;
+        // Formula: z = z^2 + c
+        float x = z.x * z.x - z.y * z.y + coord.x;
         float y = 2.0 * z.x * z.y + coord.y;
         z.x = x;
         z.y = y;
         if ((z.x * z.x + z.y * z.y) > 4.0) return i;
     }
-  return MAX_INTER;
+    return MAX_INTER;
 }
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
