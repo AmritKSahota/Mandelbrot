@@ -10,12 +10,12 @@ using namespace sf;
 //inheriting from sf::Drawable -- AS
 
 //constants
-cnst unsigned int MAX_INTER = 64;
+const unsigned int MAX_INTER = 64;
 const float BASE_WIDTH = 4.0;
 const float BASE_HEIGHT = 4.0;
 const float BASE_ZOOM = 0.5;
 
-enum class State {CALCULATING< DISPLAYING };
+enum class State {CALCULATING, DISPLAYING };
 
 class ComplexPlane : public Drawable
 {
@@ -28,7 +28,7 @@ public:
   void setMouseLocation (mousePixel: Vector2i);
   void loadText (text: Text& );
   void updateRender();
-
+Vector2f mapPixeltoCoords (Vector2i mousePixel)
 //because we're using sf::Drawable this is mandatory
 virtual void draw (RenderTarget& target, RenderStates states) const;
 
@@ -44,7 +44,7 @@ private:
 // these I think go here, but the image was a little confusing tbh -- AS
 size_t countIteration(Vector2f coord);
 void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
-Vector2f mapPixeltoCoords (Vector2i mousePixel)
+
 
 };
 
