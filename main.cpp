@@ -1,26 +1,29 @@
 #include "ComplexPlane.h"
 
-int main ()
+int main()
 {
-  int width = VideoMode::getDesktopMode().width/2;
-  int height = VideoMode :: getDesktopMode().height/2;
-  //divided it by 2 to make it smaller, set up desktop res. it should run now -- AS
-  //you can change it at the end if you want but please change it back if so  : ) -- AS
+    // Get desktop resolution and divide by 2
+    int width = VideoMode::getDesktopMode().width / 2;
+    int height = VideoMode::getDesktopMode().height / 2;
 
-  RenderWindow window(VideoMode(width, height), "Mandelbrot Visualz");
-  ComplexPlane cp(width, height);
+    RenderWindow window(VideoMode(width, height), "Mandelbrot Visualizer");
+    ComplexPlane cp(width, height);
 
-  Font font;
-  font.loadFromFile("arial.ttf"); // please work font file pls -- AS
-  Text text;
-  text.setFont(font);
-  text.setCharacterSize(16);
-  text.setFillColor(Color::White);
+    Font font;
+    if (!font.loadFromFile("arial.ttf")) {
+        // Handle font error if necessary
+    }
 
-  while (window.isOpen())
+    Text text;
+    text.setFont(font);
+    text.setCharacterSize(16);
+    text.setFillColor(Color::White);
+    text.setPosition(10, 10);
+
+    while (window.isOpen())
     {
-      Event event;
-      while (window.pollEvent(event))
+        Event event;
+        while (window.pollEvent(event))
         {
             if (event.type == Event::Closed)
                 window.close();
@@ -61,5 +64,5 @@ int main ()
         window.draw(text);
         window.display();
     }
-  return 0;
+    return 0;
 }
