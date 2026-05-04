@@ -1,10 +1,10 @@
-#inlcude "ComplexPlane.h"
+#include "ComplexPlane.h"
 using namespace std;
 using namespace sf;
 ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 {
   m_pixel_size = {pixelWidth, pixelHeight};
-  m_aspect_ratio = (float)pixelHeight / pixelWidth;
+  m_aspectRatio = (float)pixelHeight / pixelWidth;
   m_plane_center = {0,0};
   //the curly braces are nice
   m_plane_size = {BASE_WIDTH, BASE_HEIGHT * m_aspectRatio};
