@@ -1,51 +1,37 @@
-#ifndef COMPLEX_PLANE_H
 #define COMPLEX_PLANE_H
-
+#endif
+#ifndef COMPLEX_PLANE_H
 #include <SFML/Graphics.hpp>
 #include <cmath>
 #include <sstream>
-
-using namespace sf;
-
-//inheriting from sf::Drawable -- AS
-
-//constants
-const unsigned int MAX_INTER = 64;
-const float BASE_WIDTH = 4.0;
-const float BASE_HEIGHT = 4.0;
-const float BASE_ZOOM = 0.5;
-
-enum class State {CALCULATING, DISPLAYING };
-
+// Global constants
+ComplexPlane(int pixelWidth, int pixelHeight);
+State m_State;
+Vector2f m_mouseLocation;
+Vector2f m_plane_center;
+Vector2f m_plane_size;
+Vector2f mapPixelToCoords(Vector2i mousePixel);
+Vector2i m_pixel_size;
+VertexArray m_vArray;
 class ComplexPlane : public Drawable
-{
-public: 
-  ComplexPlane(int pixelWidth, int PixelHeight);
-  void updateRender();
-  void zoomIn();
-  void zoomOut();
-  void setCenter (mousePixel: Vector2i);
-  void setMouseLocation (mousePixel: Vector2i);
-  void loadText (text: Text& );
-  void updateRender();
-Vector2f mapPixeltoCoords (Vector2i mousePixel)
-//because we're using sf::Drawable this is mandatory
-virtual void draw (RenderTarget& target, RenderStates states) const;
-
+const float BASE_HEIGHT = 4.0;
+const float BASE_WIDTH = 4.0;
+const float BASE_ZOOM = 0.5;
+const unsigned int MAX_ITER = 64;
+enum class State { CALCULATING, DISPLAYING };
+float m_aspectRatio;
+int m_zoomCount;
 private:
-  VertexArray m_vArray;
-  State m_State;
-  Vector2f m_mouseLocation;
-  Vector2f m_plane_center;
-  Vector2f m_plane_size;
-  Vector2i m_pixel_size;
-  int m_zoomCount;
-  float m_aspectRatio;
-// these I think go here, but the image was a little confusing tbh -- AS
-size_t countIteration(Vector2f coord);
+public:
+size_t countIterations(Vector2f coord);
+using namespace sf;
+virtual void draw(RenderTarget& target, RenderStates states) const;
 void iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b);
-
-
+void loadText(Text& text);
+void setCenter(Vector2i mousePixel);
+void setMouseLocation(Vector2i mousePixel);
+void updateRender();
+void zoomIn();
+void zoomOut();
+{
 };
-
-#endif
